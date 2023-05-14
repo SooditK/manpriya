@@ -6,20 +6,9 @@ import { UserAuthForm } from "@/components/wrapper/UserAuthForm";
 import { type GetServerSideProps, type NextPage } from "next";
 import Head from "next/head";
 import axios from "axios";
-import { useEffect, useState } from "react";
 import { getServerAuthSession } from "@/server/auth";
 
-const Login: NextPage = () => {
-  const [quote, setQuote] = useState("");
-  async function fetchQuote() {
-    const response = await axios.get<{
-      data: Array<string>;
-    }>("http://loremricksum.com/api/?paragraphs=1&quotes=1");
-    setQuote(response.data.data[0] as string);
-  }
-  useEffect(() => {
-    void fetchQuote();
-  }, []);
+const Login: NextPage<{ quote: string }> = ({ quote }) => {
   return (
     <>
       <Head>
@@ -104,7 +93,12 @@ export const getServerSideProps: GetServerSideProps = async (context) => {
       },
     };
   }
+  const quote = await axios.get<{
+    data: Array<string>;
+  }>("http://loremricksum.com/api/?paragraphs=1&quotes=1");
   return {
-    props: {},
+    props: {
+      quote: quote.data.data[0] as string,
+    },
   };
 };
