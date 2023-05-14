@@ -7,6 +7,8 @@ import { useState } from "react";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { getFetch, httpBatchLink, loggerLink } from "@trpc/client";
 import superjson from "superjson";
+import { Toaster } from "react-hot-toast";
+import { Provider } from 'jotai'
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -46,13 +48,16 @@ const MyApp: AppType<{ session: Session | null }> = ({
     })
   );
   return (
-    <api.Provider client={trpcClient} queryClient={queryClient}>
-      <QueryClientProvider client={queryClient}>
-        <SessionProvider session={session}>
-          <Component {...pageProps} />
-        </SessionProvider>
-      </QueryClientProvider>
-    </api.Provider>
+    <Provider>
+      <api.Provider client={trpcClient} queryClient={queryClient}>
+        <QueryClientProvider client={queryClient}>
+          <SessionProvider session={session}>
+            <Component {...pageProps} />
+            <Toaster position="bottom-center" />
+          </SessionProvider>
+        </QueryClientProvider>
+      </api.Provider>
+    </Provider>
   );
 };
 

@@ -3,6 +3,7 @@ import { z } from "zod";
 import { prisma } from "../db";
 import { TRPCError } from "@trpc/server";
 import bcryptjs from "bcryptjs";
+import { clientRouter } from "./client/clientRouter";
 
 export const appRouter = t.router({
   register: publicProcedure
@@ -45,4 +46,5 @@ export const appRouter = t.router({
       message: "You are logged in",
     };
   }),
+  client: clientRouter,
 });

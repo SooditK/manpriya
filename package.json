@@ -16,6 +16,9 @@
     "wsrun": "^5.2.0"
   },
   "dependencies": {
+    "@radix-ui/react-dialog": "^1.0.3",
+    "axios": "^1.4.0",
+    "jotai-trpc": "^0.5.1",
     "superjson": "^1.12.3"
   }
 }
