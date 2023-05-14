@@ -8,7 +8,7 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { getFetch, httpBatchLink, loggerLink } from "@trpc/client";
 import superjson from "superjson";
 import { Toaster } from "react-hot-toast";
-import { Provider } from 'jotai'
+import { Provider } from "jotai";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
@@ -34,7 +34,8 @@ const MyApp: AppType<{ session: Session | null }> = ({
             (opts.direction === "down" && opts.result instanceof Error),
         }),
         httpBatchLink({
-          url: `${getBaseUrl()}/trpc`,
+          // url: `${getBaseUrl()}/trpc`,
+          url: `/trpc`,
           fetch: async (input, init?) => {
             const fetch = getFetch();
             return fetch(input, {

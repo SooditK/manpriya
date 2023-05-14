@@ -21,5 +21,13 @@ const config = {
   images: {
     domains: ["wallpapercave.com"],
   },
+  async rewrites() {
+    return [
+      {
+        source: "/trpc/:path*",
+        destination: "https://manpriya.tupite.ga/trpc/:path*", // Proxy to Backend
+      },
+    ];
+  },
 };
 export default config;
