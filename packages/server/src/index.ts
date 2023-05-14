@@ -23,7 +23,7 @@ app.use(
   })
 );
 app.use(express.urlencoded({ extended: true }));
-const PORT = Number(process.env.PORT) || 3001;
+const PORT = Number(process.env.SERVERPORT) || 3001;
 
 app.use(
   "/trpc",
