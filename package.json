@@ -6,7 +6,8 @@
   "private": true,
   "scripts": {
     "start": "concurrently \"wsrun --parallel start\"",
-    "dev": "concurrently \"wsrun --parallel dev\""
+    "dev": "concurrently \"wsrun --parallel dev\"",
+    "build": "wsrun --parallel build"
   },
   "workspaces": [
     "packages/*"

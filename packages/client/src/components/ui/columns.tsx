@@ -82,6 +82,7 @@ export const columns: ColumnDef<Client>[] = [
       );
     },
     filterFn: (row, id, value) => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
       return value.includes(row.getValue(id));
     },
   },
@@ -98,6 +99,7 @@ export const columns: ColumnDef<Client>[] = [
       );
     },
     filterFn: (row, id, value) => {
+      // eslint-disable-next-line @typescript-eslint/no-unsafe-return, @typescript-eslint/no-unsafe-member-access, @typescript-eslint/no-unsafe-call
       return value.includes(row.getValue(id));
     },
   },
