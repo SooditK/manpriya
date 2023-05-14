@@ -15,7 +15,7 @@ const app = express();
 app.use(express.json());
 app.use(
   cors({
-    origin: "https://manpriya-client.vercel.app",
+    origin: "https://manpriya-client.vercel.app" || "http://localhost:3000",
     credentials: true,
   })
 );
