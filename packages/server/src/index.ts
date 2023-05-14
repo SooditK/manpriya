@@ -13,7 +13,12 @@ import { MailOptions } from "nodemailer/lib/json-transport";
 const app = express();
 
 app.use(express.json());
-app.use(cors());
+app.use(
+  cors({
+    origin: "https://manpriya-client.vercel.app",
+    credentials: true,
+  })
+);
 app.use(express.urlencoded({ extended: true }));
 const PORT = Number(process.env.PORT) || 3001;
 
