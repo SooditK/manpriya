@@ -6,10 +6,11 @@ import { userSchema, type User } from "./trpc";
 import { TRPCError } from "@trpc/server";
 
 export async function createContext({ req, res }: CreateExpressContextOptions) {
-  const session = parseCookieString(
-    req.headers.cookie as string,
-    "next-auth.session-token"
-  );
+  const cookieName =
+    process.env.NODE_ENV === "production"
+      ? "__Secure-next-auth.session-token"
+      : "next-auth.session-token";
+  const session = parseCookieString(req.headers.cookie as string, cookieName);
   const user = jwt.verify(
     session as string,
     process.env.NEXTAUTH_SECRET as string
