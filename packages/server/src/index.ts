@@ -16,7 +16,22 @@ app.use(express.json());
 app.use(
   cors({
     credentials: true,
-    origin: "*",
+    origin(requestOrigin, callback) {
+      const allowedOrigins = [
+        "http://localhost:3000",
+        "https://manpriya-client.vercel.app",
+      ];
+      if (!requestOrigin) {
+        return callback(null, true);
+      }
+      if (allowedOrigins.indexOf(requestOrigin) === -1) {
+        const msg =
+          "The CORS policy for this site does not " +
+          "allow access from the specified Origin.";
+        return callback(new Error(msg), false);
+      }
+      return callback(null, true);
+    },
   })
 );
 app.use(express.urlencoded({ extended: true }));
