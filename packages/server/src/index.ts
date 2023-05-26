@@ -9,6 +9,7 @@ import transporter from "./mail/transport";
 import { prisma } from "./db";
 import { createEmailText } from "./mail/createEmailText";
 import { MailOptions } from "nodemailer/lib/json-transport";
+import dayjs from "dayjs";
 
 const app = express();
 
@@ -52,12 +53,18 @@ cron.schedule("0 12 * * *", async () => {
       sendemail: true,
     },
   });
+  const invoiceDueInDays = clients.map((client) => {
+    const billDueDate = dayjs(client.billduedate);
+    const currentDate = dayjs();
+    const diff = billDueDate.diff(currentDate, "day");
+    return diff;
+  });
 
   console.log("clients", clients);
   console.log("currentDate", currentDate);
   console.log("nextFiveDays", nextFiveDays);
 
-  clients.forEach(async (client) => {
+  clients.forEach(async (client, index) => {
     const emailText = createEmailText(
       client.invoice,
       client.name,
@@ -66,7 +73,9 @@ cron.schedule("0 12 * * *", async () => {
     const mailOptions: MailOptions = {
       from: process.env.EMAIL,
       to: client.email,
-      subject: "Invoice Reminder",
+      subject: `Invoice ${client.invoice} due in ${
+        invoiceDueInDays[index] + 1
+      } days`,
       html: emailText,
     };
 

@@ -1,17 +1,3 @@
-// Dear [Vendor Name],
-
-// I am writing to remind you that your invoice [Invoice Number] is due for payment in [No. of days] day on [Due Date]. As a valued client, we greatly appreciate your promptness in settling your invoices.
-
-// Please ensure that the payment is made on time to avoid any unnecessary late payment charges. If you have already made the payment, please disregard this message.
-
-// If you have any queries or concerns regarding this invoice, please do not hesitate to contact us. We are always ready to assist you in any way possible.
-
-// Thank you for your cooperation and prompt attention to this matter.
-
-// Best regards,
-
-// Team Oren
-
 export function createEmailText(
   invoicenumber: string,
   vendorname: string,
@@ -27,17 +13,5 @@ export function createEmailText(
     month: "long",
     day: "numeric",
   });
-  return `Dear ${vendorname},
-
-I am writing to remind you that your invoice ${invoicenumber} is due for payment in ${numberOfDays} day on ${formattedDueDate}. As a valued client, we greatly appreciate your promptness in settling your invoices.
-
-Please ensure that the payment is made on time to avoid any unnecessary late payment charges. If you have already made the payment, please disregard this message.
-
-If you have any queries or concerns regarding this invoice, please do not hesitate to contact us. We are always ready to assist you in any way possible.
-
-Thank you for your cooperation and prompt attention to this matter.
-
-Best regards,
-
-Team Oren`;
+  return `Dear ${vendorname},<br><br>I am writing to remind you that your invoice ${invoicenumber} is due for payment in ${numberOfDays} day on ${formattedDueDate}. As a valued client, we greatly appreciate your promptness in settling your invoices.<br><br>Please ensure that the payment is made on time to avoid any unnecessary late payment charges. If you have already made the payment, please disregard this message.<br><br>If you have any queries or concerns regarding this invoice, please do not hesitate to contact us. We are always ready to assist you in any way possible.<br><br>Thank you for your cooperation and prompt attention to this matter.<br><br>Best regards,<br><br>Team Oren`;
 }

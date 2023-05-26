@@ -9,6 +9,14 @@ const transporter = nodemailer.createTransport({
   },
 });
 
+// const transporter = nodemailer.createTransport({
+//   service: "gmail",
+//   auth: {
+//     user: process.env.ORENNOW_PERSONAL_EMAIL,
+//     pass: process.env.ORENNOW_PERSONAL_PASSWORD,
+//   },
+// });
+
 transporter.verify((error, success) => {
   if (error) {
     console.log(error);
